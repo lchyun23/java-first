@@ -5,10 +5,11 @@ package com.example.demo;
  */
 public class ArrayWeeks {
 
-  String[] weeks = new String[7];
+  String[] weeks;
 
-  // 생성자에서 배열 값 초기화
-  public ArrayWeeks() {
+  // 배열 값 할당하는 메서드
+  public void initializeWeeks() {
+    weeks = new String[7];
     weeks[0] = "월";
     weeks[1] = "화";
     weeks[2] = "수";
