@@ -17,4 +17,11 @@ public class ArrayWeeks {
     weeks[5] = "토";
     weeks[6] = "일";
   }
+
+  // 배열 값을 출력하는 메서드
+  public void printWeeks() {
+    for (String day : weeks) {
+      System.out.println(day);
+    }
+  }
 }
