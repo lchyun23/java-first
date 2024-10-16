@@ -10,5 +10,4 @@ public class DemoApplication {
     arrayWeeks.initializeWeeks(); // 배열 초기화
     arrayWeeks.printWeeks(); // 배열 값 출력
   }
-
 }
