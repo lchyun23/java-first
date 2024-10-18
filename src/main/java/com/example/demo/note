@@ -1,0 +1,38 @@
+/*
+    1. new ArrayList<>
+      - 빈 ArrayList를 생성하는 코드
+      - 동적으로 크기를 변경할 수 있는 리스트
+
+    2. Arrays.asList()
+      - 배열을 리스트로 변환하는 메서드
+      - 괄호 안에 배열이나 값을 넣으면, 그것을 기반으로 리스트를 생성할 수 있다.
+
+    3. new ArrayList<>(Arrays.asList())
+      - 2번으로 생성된 리스트를 새로운 ArrayList로 감싸서 크기를 변경할 수 있는 리스트를 만들 수 있다.
+      - Arrays.aslist()로 생성된 리스트는 크기를 변경이 불가해서, 이를 ArrayList로 감싸 가변적인 형태로 만든다.
+ */
+
+/*
+* sort
+* default void sort(Comparator<? super E> c) {
+   Object[] a = this.toArray();              -> 1. List의 요소를 배열로 변환
+   Arrays.sort(a, (Comparator) c);           -> 2. 배열을 Comparator를 사용해 정렬
+   ListIterator<E> i = this.listIterator();  -> 3. ListIterator를 사용해 리스트 순회
+   for (Object e : a) {                      -> 4. 정렬된 배열의 요소를 리스트에 다시 대입
+       i.next();                             -> 리스트의 다음 요소로 이동
+       i.set((E) e);                         -> 현재 위치에 정렬된 값을 대입
+ }
+}
+
+*/
+
+
+  /* System.out.println(teams.sort(Comparator.naturalOrder()); 하면 오류난다.
+  teams.sort(Comparator.naturalOrder() 의 반환값이 void 이기 때문이다.
+  리스트를 정렬만할 뿐 정렬된 리스트를 반환하지 않는다. 반환값이 없는 것을 print하려고 하기 때문에 오류가 난다.
+   */
+
+
+
+* 값을 가져올 때는 Getter
+* 값을 지정할 때는 Setter

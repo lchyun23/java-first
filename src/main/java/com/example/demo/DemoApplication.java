@@ -20,10 +20,32 @@ public class DemoApplication {
         new Member(2, "Tany", 12, "t@ex.com")
     };
 
+    // 길이 기반 Array 선언
+    Member[] members3 = new Member[3]; // Member 타입의 배열을 길이 3으로 초기화하여 생성하였다.
+
+    // 선언한 배열에 값 넣기
+    members3[0] = new Member(1, "Nany", 15, "n@ex.com");
+    members3[1] = new Member(2, "Oany", 18, "m@ex.com");
+    members3[2] = new Member(3, "Many", 20, "m@ex.com");
+
+    System.out.println("members3 프린트: " + members3); // 출력값: [Lcom.example.demo.Member;@13a5fe33
+    System.out.println("members3 0번째: " + members3[0]);
+
+    // for문을 사용해서 출력해보기
+    for (int i = 0; i < members3.length; i++) {
+//      System.out.println("members3[" + i + "]= " + members3); // 주소값 출력.
+      System.out.println("0-1. members3[" + i + "] : " + Arrays.toString(members3));
+    }
+
     Product[] products = {
         new Product(1, "mobile", 12.2, "스마트폰"),
         new Product(2, "monitor", 13.3, "모니터")
     };
+
+    // for문으로 products 출력하기
+    for (int i = 0; i < products.length; i++) {
+      System.out.println("0-2. products[" + i + "] : " + Arrays.toString(products));
+    }
 
     Product[] products2 = new Product[]{
         new Product(1, "mouse", 14.4, "마우스"),
@@ -54,6 +76,25 @@ public class DemoApplication {
     // Member, Product 같은걸 했으면 좋겠어요
     List<String> teams = new ArrayList<>(Arrays.asList("스미스", "해리", "론"));
 
+    List<Member> member_list = new ArrayList<>(Arrays.asList(members3));
+    System.out.println("0-3. members3를 넣은 member_list 출력 : " + member_list);
+
+    List<Member> member_list2 = new ArrayList<>(
+        Arrays.asList(
+            new Member(1, "Neny", 17, "ex@ex.com"),
+            new Member(2, "Maly", 16, "re@ex.com"),
+            new Member(3, "Kaly", 18, "re@ex.com"),
+            new Member(4, "Laly", 16, "re@ex.com")
+        ));
+
+    List<Product> product_list2 = new ArrayList<>(
+        Arrays.asList(new Product(1, "fork", 22.0, "포크"))
+    );
+
+    List<Car> car_list2 = new ArrayList<>(
+        Arrays.asList(new Car(1, "porsche", 22))
+    );
+
     System.out.println("1. teams[0] 출력: " + teams.get(0));
 
     teams.add("포피");
@@ -65,19 +106,32 @@ public class DemoApplication {
     teams.remove(0);
     System.out.println("4. teams[0] 삭제: " + teams);
 
+    System.out.println("5. teams sort: " + teams);
+
     // (1) 람다 기준             : (o1, o2) -> { return o1.getAge() - o2.getAge() }
+    member_list2.sort((Member m1, Member m2) -> {
+      return Integer.compare(m2.getAge(), m1.getAge());
+    });
+
+    // sort된 거를 확인해보려면?
+    System.out.println("람다 sort : " + member_list2);
+
     // (2+) 함수형 인터페이스 기준  : new Comparator {  @Override Integer compare(o1, o2) { return ,,, }  }
+    member_list2.sort(new Comparator<Member>() {
+      @Override
+      public int compare(Member m1, Member m2) {
+        return Integer.compare(m1.getAge(), m2.getAge());
+      }
+    });
+    System.out.println("함수형 인터페이스 sort : " + member_list2);
+
     teams.sort(Comparator.naturalOrder());
     /* 기본 정렬 순서 : 숫자는 오름차순, 문자열은 알파벳순.
      * 정렬하려는 객체가 Comparable 인터페이스를 구현해야 한다.
      * String, Integer 와 같은 기본 타입은 이미 Comparable 인터페이스를 구현하고 있다.
      */
 
-    /* System.out.println(teams.sort(Comparator.naturalOrder()); 하면 오류난다.
-    teams.sort(Comparator.naturalOrder() 의 반환값이 void 이기 때문이다.
-    리스트를 정렬만할 뿐 정렬된 리스트를 반환하지 않는다. 반환값이 없는 것을 print하려고 하기 때문에 오류가 난다.
-     */
-    System.out.println("5. teams sort: " + teams);
+//    List<String> teams = new ArrayList<>(Arrays.asList("스미스", "해리", "론"));
 
     teams.contains("만다린"); // 포함 여부 확인
     System.out.println("6. 만다린이 포함됐는가?: " + teams.contains("만다린")); // true, false
@@ -101,7 +155,7 @@ public class DemoApplication {
         new Member(10, "ari", 20, "ari@ex.com"),
         new Member(11, "nara", 22, "nara@ex.com")
     ));
-    System.out.println("10. Member 타입의 member1 생성: " + member1);
+    System.out.println("10. Member 타입의 member1 리스트 생성: " + member1);
     // 출력 포매팅을 쓴다면?
     for (Member member : member1) {
       /* 향상된 for문 형식
@@ -143,6 +197,4 @@ public class DemoApplication {
     // 오류가 나진 않는다. 그러나 추가되지도 않는다.
 
   }
-
-
 }
