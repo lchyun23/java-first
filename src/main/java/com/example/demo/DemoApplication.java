@@ -290,8 +290,11 @@ public class DemoApplication {
 
     // set - 정렬 : 2. HashSet -> TreeSet
     System.out.println("38-2. HashSet to TreeSet: ");
-    TreeSet<Excercise> excerciseTreeSet = new TreeSet<>(Comparator.comparing(Excercise::getName));
+    TreeSet<Excercise> excerciseTreeSet = new TreeSet<>(
+        Comparator.comparing(Excercise::getDescription));
+    excerciseTreeSet.addAll(excerciseSet);
     excerciseTreeSet.forEach(System.out::println);
+
     System.out.println(excerciseTreeSet.getClass());
 
     // set - 정렬 : 3. HashSet -> Stream 이용
@@ -303,5 +306,18 @@ public class DemoApplication {
     System.out.println("39. HashSet Size: " + excerciseSet.size());
     System.out.println("40. HashSet isEmpty: " + excerciseSet.isEmpty());
 
+    excerciseTreeSet.add(new Excercise(8, "hockey", "하키"));
+    System.out.println("41. TreeSet add: " + excerciseTreeSet);
+
+    excerciseTreeSet.remove(new Excercise(3, "tennis", "테니스"));
+    System.out.println("42. TreeSet remove: " + excerciseTreeSet);
+
+    System.out.println(
+        "43. TreeSet Contains: " + excerciseTreeSet.contains(new Excercise(1, "running", "달려라?")));
+
+    System.out.println("44. TreeSet size: " + excerciseTreeSet.size());
+
+    excerciseTreeSet.clear();
+    System.out.println("45. TreeSet Clear: " + excerciseTreeSet);
   }
 }
