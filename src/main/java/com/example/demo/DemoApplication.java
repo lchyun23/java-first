@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class DemoApplication {
 
@@ -258,6 +259,49 @@ public class DemoApplication {
 
     excerciseSet.remove(new Excercise(2, "swimming", "수영"));
     System.out.println("34. HashSet remove: " + excerciseSet);
+
+    System.out.println(
+        "35. HashSet continas: " + excerciseSet.contains(new Excercise(3, "rowing", "조정")));
+
+    System.out.println("36. HashSet size: " + excerciseSet.size());
+
+    excerciseSet.clear();
+    System.out.println("37. HashSet clear: " + excerciseSet);
+
+    // set - 하나씩 add 하는 법
+    excerciseSet.add(new Excercise(1, "boxing", "복싱"));
+    excerciseSet.add(new Excercise(4, "yoga", "요가"));
+    excerciseSet.add(new Excercise(7, "baseball", "야구"));
+
+    // set - 한꺼번에 add 하기
+    excerciseSet.addAll(Arrays.asList(
+        new Excercise(8, "swimming", "수영"),
+        new Excercise(3, "tennis", "테니스"),
+        new Excercise(2, "basketball", "농구")
+    ));
+
+    System.out.println("38-1. HashSet to List: ");
+    // set - 정렬 : 1. HashSet -> List로 변환
+    List<Excercise> excerciseList = new ArrayList<>((excerciseSet));
+    // Comparator로 name 필드 기준으로 정렬
+    excerciseList.sort(Comparator.comparing(Excercise::getName));
+    // set - 정렬 출력
+    excerciseList.forEach(System.out::println);
+
+    // set - 정렬 : 2. HashSet -> TreeSet
+    System.out.println("38-2. HashSet to TreeSet: ");
+    TreeSet<Excercise> excerciseTreeSet = new TreeSet<>(Comparator.comparing(Excercise::getName));
+    excerciseTreeSet.forEach(System.out::println);
+    System.out.println(excerciseTreeSet.getClass());
+
+    // set - 정렬 : 3. HashSet -> Stream 이용
+    System.out.println("38-3. HashSet using Stream: ");
+//    System.out.println(excerciseSet.getClass());
+    excerciseSet.stream().sorted(Comparator.comparing(Excercise::getName))
+        .forEach(System.out::println);
+
+    System.out.println("39. HashSet Size: " + excerciseSet.size());
+    System.out.println("40. HashSet isEmpty: " + excerciseSet.isEmpty());
 
   }
 }
