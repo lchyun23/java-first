@@ -187,7 +187,7 @@ public class DemoApplication {
             new Car(3, "현대", 14)
         )
     );
-    System.out.println("16. TreeSet cars1 : " + cars1);
+    System.out.println("16. HashSet cars1 : " + cars1);
 
     cars1.add(new Car(4, "소나타", 20));
     System.out.println("17. HashSet cars1 출력: " + cars1);
