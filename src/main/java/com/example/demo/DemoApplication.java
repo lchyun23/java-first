@@ -4,38 +4,48 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
 public class DemoApplication {
 
   public static void main(String[] args) {
-    Member[] members = {
-        new Member(1, "Bany", 12, "b@ex.com"),
-        new Member(2, "Aany", 12, "b@ex.com")
+    Member[] members1 = {
+        new Member(1, "Any", 12, "a@ex.com"),
+        new Member(2, "Bny", 12, "b@ex.com")
     };
+    System.out.println(members1.getClass());
+    /* class [Lcom.example.demo.Member;
+     * com.example.demo.Member 클래스의 객체 배열을 의미한다.
+     */
 
     Member[] members2 = new Member[]{
-        new Member(1, "Cany", 13, "b@ex.com"),
-        new Member(2, "Tany", 12, "t@ex.com")
+        new Member(1, "Cny", 13, "c@ex.com"),
+        new Member(2, "Dny", 12, "d@ex.com")
     };
 
     // 길이 기반 Array 선언
     Member[] members3 = new Member[3]; // Member 타입의 배열을 길이 3으로 초기화하여 생성하였다.
 
-    // 선언한 배열에 값 넣기
-    members3[0] = new Member(1, "Nany", 15, "n@ex.com");
-    members3[1] = new Member(2, "Oany", 18, "m@ex.com");
-    members3[2] = new Member(3, "Many", 20, "m@ex.com");
+    // 선언한 members3 객체 배열에 값 넣기
+    members3[0] = new Member(1, "Eny", 15, "e@ex.com");
+    members3[1] = new Member(2, "Fny", 18, "f@ex.com");
+    members3[2] = new Member(3, "Gny", 20, "g@ex.com");
 
-    System.out.println("members3 프린트: " + members3); // 출력값: [Lcom.example.demo.Member;@13a5fe33
+    System.out.println("members3 프린트: " + members3);
+    /* 출력값: [Lcom.example.demo.Member;@13a5fe33
+        - 배열 객체의 참조 값(메모리 주소)을 나타내는 문자열 표현
+     */
+
     System.out.println("members3 0번째: " + members3[0]);
 
     // for문을 사용해서 출력해보기
     for (int i = 0; i < members3.length; i++) {
-//      System.out.println("members3[" + i + "]= " + members3); // 주소값 출력.
       System.out.println("0-1. members3[" + i + "] : " + Arrays.toString(members3));
     }
+
+    // enhanced for문 사용해보기
 
     Product[] products = {
         new Product(1, "mobile", 12.2, "스마트폰"),
@@ -180,21 +190,74 @@ public class DemoApplication {
     tfs.sort(Boolean::compareTo);
     System.out.println("15. tfs tfs.sort(Boolean::compareTo) 한 이후: " + tfs);
 
-    Set<Car> cars1 = new HashSet<Car>(
-        Arrays.asList(
-            new Car(1, "테슬라", 10),
-            new Car(2, "아우디", 12),
-            new Car(3, "현대", 14)
-        )
-    );
-    System.out.println("16. HashSet cars1 : " + cars1);
+    member1.subList(0, 2);
+    System.out.println("17. member1 부분 출력: ");
 
-    cars1.add(new Car(4, "소나타", 20));
-    System.out.println("17. HashSet cars1 출력: " + cars1);
-    // 17. HashSet cars1 출력: Car(id=4, name=소나타, price=20) - id 4번이 가장 먼저 출력된다.
-    cars1.add(new Car(4, "소나타", 20));
-    System.out.println("18. HashSet cars1 중복값 추가: " + cars1);
-    // 오류가 나진 않는다. 그러나 추가되지도 않는다.
+    member1.remove(0);
+    System.out.println("16. 0번 삭제 후 member1: " + member1);
+
+    member1.contains(new Member(1, "ari", 20, "ari@ex.com"));
+    System.out.println(
+        "18. member1 포함: " + member1.contains(new Member(1, "ari", 20, "ari@ex.com")));
+
+    System.out.println("19. member1 크기: " + member1.size());
+
+    member1.clear();
+    System.out.println("20. member1 리셋: " + member1);
+
+    member1.isEmpty();
+    System.out.println("21. member1 검사: " + member1.isEmpty());
+
+    List<Product> product_link = new LinkedList<Product>(Arrays.asList(
+        new Product(1, "pencil", 2.3, "연필"),
+        new Product(2, "pen", 3.5, "볼펜"),
+        new Product(3, "ruler", 3.3, "자")
+    ));
+
+    System.out.println("22. LinkedList get: " + product_link.get(2));
+
+    product_link.add(new Product(4, "spoon", 2.6, "숟가락"));
+    System.out.println("23. LinkedList add: " + product_link);
+
+    product_link.set(1, new Product(11, "editor", 2.7, "편집기"));
+    System.out.println("24. LinkedList set: " + product_link);
+
+    product_link.remove(3);
+    System.out.println("25. LinkedList remove: " + product_link);
+
+    System.out.println("26. LinkedList subList: " + product_link.subList(0, 2));
+
+    product_link.sort(new Comparator<Product>() {
+      @Override
+      public int compare(Product p1, Product p2) {
+        return p1.getDescription().compareTo(p2.getDescription());
+      }
+    });
+    System.out.println("27. LinkedList description 기준 sorting: " + product_link);
+
+    System.out.println(
+        "28. LinkedList Container: " + product_link.contains(new Product(1, "pencil", 2.4, "없음")));
+
+    System.out.println("29. LinkedList isEmpty: " + product_link.isEmpty());
+
+    System.out.println("30. LinkedList size: " + product_link.size());
+
+    product_link.clear();
+    System.out.println("31. LinkedList clear: " + product_link);
+
+    Set<Excercise> excerciseSet = new HashSet<Excercise>(Arrays.asList(
+        new Excercise(1, "walking", "걷기"),
+        new Excercise(2, "swimming", "수영")
+    ));
+
+    System.out.println("32. HashSet print: " + excerciseSet);
+    System.out.println("32-1. HashSet 자료형 확인: " + excerciseSet.getClass());
+
+    excerciseSet.add(new Excercise(3, "rowing", "조정"));
+    System.out.println("33. HashSet add : " + excerciseSet);
+
+    excerciseSet.remove(new Excercise(2, "swimming", "수영"));
+    System.out.println("34. HashSet remove: " + excerciseSet);
 
   }
 }
